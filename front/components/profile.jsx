@@ -1,3 +1,4 @@
+import { GithubOutlined, GoogleOutlined } from '@ant-design/icons';
 export default class Profile extends React.Component {
   render() {
     return (
@@ -8,18 +9,28 @@ export default class Profile extends React.Component {
         </div>
 
         {/* NickName */}
-        <div style={{ fontSize: '1.2em', marginLeft: '10px' }}>daesoo94 / Sift</div>
+        <div style={{ fontSize: '1.2em', marginLeft: '4px' }}>심대수 (daesoo94)</div>
+        <div style={{ display: 'flex' }}>
+          <GoogleOutlined style={{ margin: '2px 12px 2px 8px', fontSize: '1em' }} />
+          <span style={{ fontSize: '0.8em', marginTop: '1px' }}>tlaeotn123@gmail.com</span>
+        </div>
+        <div style={{ display: 'flex', marginBottom: '4px' }}>
+          <GithubOutlined style={{ margin: '2px 12px 2px 8px', fontSize: '1em' }} />
+          <span style={{ fontSize: '0.8em', marginTop: '1px' }}>https://github.com/SimDaeSoo</span>
+        </div>
 
         {/* Career */}
-        <div style={{ height: '22px', margin: '8px', fontSize: '0.9em', display: 'flex' }}>
-          <img style={{ width: '22px', height: '22px', marginRight: '8px', borderRadius: '4px' }} src='/uploads/3dd388025ec64b80a1c0a97a8b158b05.jpg' />
-          <span style={{ marginRight: '5px' }}>devCat</span>
-          <span style={{ fontSize: '0.9em', marginTop: '2px' }}>2018.09 - 2020.02</span>
-        </div>
-        <div style={{ height: '22px', margin: '8px', fontSize: '0.9em', display: 'flex' }}>
-          <img style={{ width: '22px', height: '22px', marginRight: '8px', borderRadius: '4px' }} src='/uploads/785f6689047d4d478b0d593eb9c45f6a.png' />
-          <span style={{ marginRight: '5px' }}>Smart Study</span>
-          <span style={{ fontSize: '0.9em', marginTop: '2px' }}>2020.02 ~ </span>
+        <div style={{ borderTop: 'solid', borderWidth: 'thin', paddingTop: '4px', borderColor: '#0A1F25' }}>
+          <div style={{ height: '22px', margin: '4px', fontSize: '0.9em', display: 'flex' }}>
+            <img style={{ width: '22px', height: '22px', marginRight: '8px', borderRadius: '4px' }} src='/uploads/3dd388025ec64b80a1c0a97a8b158b05.jpg' />
+            <span style={{ marginRight: '5px' }}>devCat</span>
+            <span style={{ fontSize: '0.9em', marginTop: '2px' }}>2018.09 - 2020.02</span>
+          </div>
+          <div style={{ height: '22px', margin: '4px', fontSize: '0.9em', display: 'flex' }}>
+            <img style={{ width: '22px', height: '22px', marginRight: '8px', borderRadius: '4px' }} src='/uploads/785f6689047d4d478b0d593eb9c45f6a.png' />
+            <span style={{ marginRight: '5px' }}>Smart Study</span>
+            <span style={{ fontSize: '0.9em', marginTop: '2px' }}>2020.02 ~ </span>
+          </div>
         </div>
 
         {/* Favorite */}
