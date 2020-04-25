@@ -34,7 +34,7 @@ export default class BaseApp extends App {
         <Head title="Sift's Blog" />
         <Nav onCollapse={this.onCollapse} isCollapsed={isCollapsed} />
         <ToggleNav isCollapsed={isCollapsed} toggleNav={this.toggleNav} />
-        <Layout className="site-layout" style={{ marginLeft: isCollapsed || isTinyDisplay ? 0 : 220 }}>
+        <Layout className="site-layout" style={{ marginLeft: isCollapsed || isTinyDisplay ? 0 : 220, transition: 'all 0.2s' }}>
           <Header />
           <Component {...pageProps} />
           <Layout.Footer style={{ textAlign: 'center' }}>Sift's tech blog</Layout.Footer>
