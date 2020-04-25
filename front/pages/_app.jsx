@@ -3,33 +3,43 @@ import App from 'next/app';
 import { Layout } from 'antd';
 import Nav from '../components/nav';
 import Head from '../components/head';
+import Header from '../components/header';
+import ToggleNav from '../components/togglenav';
 
 export default class BaseApp extends App {
   constructor() {
     super();
     this.state = {
-      isCollapsed: false
+      isCollapsed: false,
+      isTinyDisplay: false
     }
   }
 
   onCollapse = (collapsed) => {
     const isCollapsed = collapsed;
+    const isTinyDisplay = collapsed;
+    this.setState({ isCollapsed, isTinyDisplay });
+  }
+
+  toggleNav = () => {
+    const isCollapsed = !this.state.isCollapsed;
     this.setState({ isCollapsed });
   }
 
   render() {
-    const { isCollapsed } = this.state;
+    const { isCollapsed, isTinyDisplay } = this.state;
     const { Component, pageProps } = this.props;
     return (
       <Layout>
-        <Head title="Sift's Tech Blog" />
-        <Nav onCollapse={this.onCollapse} />
-        <Layout className="site-layout" style={{ marginLeft: isCollapsed ? 0 : 220 }}>
-          <Layout.Header className="site-layout-background" style={{ padding: 0 }} />
+        <Head title="Sift's Blog" />
+        <Nav onCollapse={this.onCollapse} isCollapsed={isCollapsed} />
+        <ToggleNav isCollapsed={isCollapsed} toggleNav={this.toggleNav} />
+        <Layout className="site-layout" style={{ marginLeft: isCollapsed || isTinyDisplay ? 0 : 220 }}>
+          <Header />
           <Component {...pageProps} />
           <Layout.Footer style={{ textAlign: 'center' }}>Sift's tech blog</Layout.Footer>
         </Layout>
       </Layout>
-    )
+    );
   }
 }
