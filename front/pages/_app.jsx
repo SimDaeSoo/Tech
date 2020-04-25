@@ -1,4 +1,5 @@
 import 'antd/dist/antd.css';
+import '../styles/init.css';
 import App from 'next/app';
 import { Layout } from 'antd';
 import Nav from '../components/nav';
