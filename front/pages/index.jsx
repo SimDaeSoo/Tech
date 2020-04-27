@@ -1,22 +1,13 @@
 import { Layout } from 'antd';
-import fetch from 'isomorphic-unfetch';
+import Link from 'next/link';
+import { getDefaultImage, getUsers } from '../utils';
 import DefaultLayout from '../layouts/default';
 
-const DEFAULT_USER_INFO = {
-  name: 'User',
-  username: '-',
-  email: 'none',
-  github: 'none',
-  careers: [],
-  tags: [],
-  categories: []
-}
-
-export default class Home extends React.Component {
+export default class Blog extends React.Component {
   render() {
-    const { user } = this.props;
+    const { user, defaultImage } = this.props;
     return (
-      <DefaultLayout user={user}>
+      <DefaultLayout user={user} defaultImage={defaultImage}>
         <Layout.Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
           <div className="site-layout-background" style={{ padding: 24, textAlign: 'center' }}>
             Hello I'm Home
@@ -28,10 +19,8 @@ export default class Home extends React.Component {
 }
 
 export async function getServerSideProps(context) {
-  const DEFAULT_USER = 'daesoo94';
-  const response = await fetch(`${process.env.BASE_SSR_API_URL}/users?username=${DEFAULT_USER}`);
-  const users = await response.json();
-  const user = users[0] || DEFAULT_USER_INFO;
+  const defaultImage = await getDefaultImage();
+  const user = await getUsers(context.query.user);
 
-  return { props: { user: user } };
+  return { props: { user, defaultImage } };
 }

@@ -1,4 +1,5 @@
 import { Layout, Menu } from 'antd';
+import Link from 'next/link';
 import Profile from '../components/profile';
 
 export default class Nav extends React.Component {
@@ -8,7 +9,11 @@ export default class Nav extends React.Component {
       return user.categories.map((category, index) => {
         return (
           <Menu.Item key={index + 2} style={{ lineHeight: '25px', height: '28px', marginTop: '3px', marginBottom: '3px' }}>
-            <span className="nav-text" style={{ fontSize: '0.8em' }}>- {category.displayName}</span>
+            <span className="nav-text" style={{ fontSize: '0.8em' }}>
+              <Link href={{ path: '/', query: { user: user.username, category: category.name } }}>
+                <a>- {category.displayName}</a>
+              </Link>
+            </span>
           </Menu.Item>
         );
       });
@@ -16,7 +21,7 @@ export default class Nav extends React.Component {
   }
 
   render() {
-    const { onCollapse, isCollapsed, user } = this.props;
+    const { onCollapse, isCollapsed, user, defaultImage } = this.props;
     return (
       <Layout.Sider
         breakpoint="lg"
@@ -33,11 +38,15 @@ export default class Nav extends React.Component {
           zIndex: 1
         }}
       >
-        <Profile user={user} />
+        <Profile user={user} defaultImage={defaultImage} />
         <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
           <Menu.ItemGroup key="g1" title={<span style={{ color: 'white' }}>Category</span>}>
             <Menu.Item key="1" style={{ lineHeight: '25px', height: '28px', marginTop: '3px', marginBottom: '3px' }}>
-              <span className="nav-text" style={{ fontSize: '0.8em' }}>- All</span>
+              <span className="nav-text" style={{ fontSize: '0.8em' }}>
+                <Link href={{ path: '/', query: { user: user.username } }}>
+                  <a>- All</a>
+                </Link>
+              </span>
             </Menu.Item>
             {this.categoryElements}
           </Menu.ItemGroup>

@@ -5,9 +5,10 @@ export default class Profile extends React.Component {
       return this.props.user.careers.map((career, index) => {
         const begin = career.begin ? career.begin.slice(0, 7) : ''
         const end = career.end ? career.end.slice(0, 7) : ''
+        const thumbnail = career.thumbnail ? career.thumbnail : this.props.defaultImage;
         return (
           <div style={{ height: '22px', margin: '4px', fontSize: '0.9em', display: 'flex' }} key={index}>
-            <img style={{ width: '22px', height: '22px', marginRight: '8px', borderRadius: '4px' }} src='/uploads/4554f12f2e194ac9a75dc7b198cebc71.jpg' />
+            <img style={{ width: '22px', height: '22px', marginRight: '8px', borderRadius: '4px' }} src={thumbnail} />
             <span style={{ marginRight: '5px', lineHeight: '21px' }}>{career.name}</span>
             <span style={{ fontSize: '0.9em', marginTop: '2px' }}>{begin} - {end}</span>
           </div>
@@ -27,12 +28,13 @@ export default class Profile extends React.Component {
   }
 
   render() {
-    const { user } = this.props;
+    const { user, defaultImage } = this.props;
+    const thumbnail = user.thumbnail ? user.thumbnail : defaultImage;
     return (
       <div style={{ width: '100%', padding: '3px', paddingBottom: '8px', borderRadius: '10px', color: 'white', backgroundColor: '#00151C' }}>
         {/* Thumbnail */}
         <div style={{ width: '180px', height: '180px', margin: 'auto', marginBottom: '6px', marginTop: '15px' }}>
-          <img style={{ width: '100%', height: '100%', borderRadius: '10px' }} src='/uploads/4554f12f2e194ac9a75dc7b198cebc71.jpg' />
+          <img style={{ width: '100%', height: '100%', borderRadius: '10px' }} src={thumbnail} />
         </div>
 
         {/* NickName */}
