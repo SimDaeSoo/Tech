@@ -56,6 +56,24 @@
     },
     "thumbnail": {
       "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "github": {
+      "type": "string"
+    },
+    "careers": {
+      "via": "user",
+      "collection": "career"
+    },
+    "tags": {
+      "via": "user",
+      "collection": "tag"
+    },
+    "categories": {
+      "via": "user",
+      "collection": "category"
     }
   }
 }

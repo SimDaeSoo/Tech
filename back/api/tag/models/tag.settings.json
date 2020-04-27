@@ -1,27 +1,22 @@
 {
   "kind": "collectionType",
   "connection": "default",
-  "collectionName": "categories",
+  "collectionName": "tags",
   "info": {
-    "name": "Category"
+    "name": "Tag"
   },
   "options": {
     "increments": true,
     "timestamps": true
   },
   "attributes": {
-    "name": {
-      "type": "string",
-      "required": true,
-      "unique": true
-    },
-    "displayName": {
-      "type": "string"
-    },
     "user": {
       "plugin": "users-permissions",
       "model": "user",
-      "via": "categories"
+      "via": "tags"
+    },
+    "name": {
+      "type": "string"
     }
   }
 }

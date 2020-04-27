@@ -3,29 +3,20 @@ import Profile from '../components/profile';
 
 export default class Nav extends React.Component {
   get categoryElements() {
-    const elements = [];
-
-    elements.push(
-      <Menu.Item key="2" style={{ lineHeight: '25px', height: '28px', marginTop: '3px', marginBottom: '3px' }}>
-        <span className="nav-text" style={{ fontSize: '0.8em' }}>- Front</span>
-      </Menu.Item>
-    );
-    elements.push(
-      <Menu.Item key="3" style={{ lineHeight: '25px', height: '28px', marginTop: '3px', marginBottom: '3px' }}>
-        <span className="nav-text" style={{ fontSize: '0.8em' }}>- Back</span>
-      </Menu.Item>
-    );
-
-    elements.push(
-      <Menu.Item key="4" style={{ lineHeight: '25px', height: '28px', marginTop: '3px', marginBottom: '3px' }}>
-        <span className="nav-text" style={{ fontSize: '0.8em' }}>- DevOps</span>
-      </Menu.Item>
-    );
-
-    return elements;
+    const { user } = this.props;
+    if (user.categories) {
+      return user.categories.map((category, index) => {
+        return (
+          <Menu.Item key={index + 2} style={{ lineHeight: '25px', height: '28px', marginTop: '3px', marginBottom: '3px' }}>
+            <span className="nav-text" style={{ fontSize: '0.8em' }}>- {category.displayName}</span>
+          </Menu.Item>
+        );
+      });
+    }
   }
+
   render() {
-    const { onCollapse, isCollapsed } = this.props;
+    const { onCollapse, isCollapsed, user } = this.props;
     return (
       <Layout.Sider
         breakpoint="lg"
@@ -42,7 +33,7 @@ export default class Nav extends React.Component {
           zIndex: 1
         }}
       >
-        <Profile />
+        <Profile user={user} />
         <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
           <Menu.ItemGroup key="g1" title={<span style={{ color: 'white' }}>Category</span>}>
             <Menu.Item key="1" style={{ lineHeight: '25px', height: '28px', marginTop: '3px', marginBottom: '3px' }}>

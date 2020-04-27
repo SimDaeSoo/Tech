@@ -1,9 +1,9 @@
 {
   "kind": "collectionType",
   "connection": "default",
-  "collectionName": "categories",
+  "collectionName": "careers",
   "info": {
-    "name": "Category"
+    "name": "Career"
   },
   "options": {
     "increments": true,
@@ -11,17 +11,21 @@
   },
   "attributes": {
     "name": {
-      "type": "string",
-      "required": true,
-      "unique": true
-    },
-    "displayName": {
       "type": "string"
+    },
+    "begin": {
+      "type": "date"
+    },
+    "end": {
+      "type": "date"
     },
     "user": {
       "plugin": "users-permissions",
       "model": "user",
-      "via": "categories"
+      "via": "careers"
+    },
+    "thumbnail": {
+      "type": "string"
     }
   }
 }
