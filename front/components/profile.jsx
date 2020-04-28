@@ -1,4 +1,4 @@
-import { GithubOutlined, GoogleOutlined } from '@ant-design/icons';
+import { GithubOutlined, GoogleOutlined, EyeOutlined } from '@ant-design/icons';
 export default class Profile extends React.Component {
   get careerElements() {
     if (this.props.user.careers) {
@@ -7,10 +7,10 @@ export default class Profile extends React.Component {
         const end = career.end ? career.end.slice(0, 7) : ''
         const thumbnail = career.thumbnail ? career.thumbnail : this.props.defaultImage;
         return (
-          <div style={{ height: '22px', margin: '4px', fontSize: '0.9em', display: 'flex' }} key={index}>
+          <div style={{ height: '22px', margin: '4px', fontSize: '0.9em', display: 'flex', backgroundColor: '#253545', borderRadius: '4px' }} key={index}>
             <img style={{ width: '22px', height: '22px', marginRight: '8px', borderRadius: '4px' }} src={thumbnail} />
             <span style={{ marginRight: '5px', lineHeight: '21px' }}>{career.name}</span>
-            <span style={{ fontSize: '0.9em', marginTop: '2px' }}>{begin} - {end}</span>
+            <span style={{ fontSize: '0.8em', marginTop: '4px' }}>/ {begin} - {end}</span>
           </div>
         )
       });
@@ -28,35 +28,45 @@ export default class Profile extends React.Component {
   }
 
   render() {
-    const { user, defaultImage } = this.props;
+    const { user, defaultImage, detail } = this.props;
     const thumbnail = user.thumbnail ? user.thumbnail : defaultImage;
     return (
-      <div style={{ width: '100%', padding: '3px', paddingBottom: '8px', borderRadius: '10px', color: 'white', backgroundColor: '#00151C' }}>
+      <div style={{ width: '100%', padding: '3px', paddingBottom: '8px', borderRadius: '8px', color: 'white', backgroundColor: '#00151C', boxShadow: '0px 6px 6px 0px rgba(0, 0, 0, 0.3)' }}>
+        <div style={{ fontSize: '0.6em', marginTop: '3px', textAlign: 'center', backgroundColor: '#1890ff', borderRadius: '4px' }}>
+          <EyeOutlined style={{ fontSize: '1.2em' }} /> Views {user.views}
+        </div>
+
         {/* Thumbnail */}
-        <div style={{ width: '180px', height: '180px', margin: 'auto', marginBottom: '6px', marginTop: '15px' }}>
+        <div style={{ width: '180px', height: '180px', margin: 'auto', marginBottom: '3px', marginTop: '7px' }}>
           <img style={{ width: '100%', height: '100%', borderRadius: '10px' }} src={thumbnail} />
         </div>
 
         {/* NickName */}
-        <div style={{ fontSize: '1.2em', marginLeft: '4px' }}>{user.name} ({user.username})</div>
-        <div style={{ display: 'flex' }}>
-          {/* TODO: Email Connection */}
-          <GoogleOutlined style={{ margin: '2px 12px 2px 8px', fontSize: '1em' }} />
-          <span style={{ fontSize: '0.8em' }}>{user.email}</span>
-        </div>
-        <div style={{ display: 'flex', marginBottom: '4px' }}>
-          {/* TODO: Github Connection */}
-          <GithubOutlined style={{ margin: '2px 12px 2px 8px', fontSize: '1em' }} />
-          <span style={{ fontSize: '0.8em' }}>{user.github}</span>
-        </div>
+        <div style={{ fontSize: '1.2em', marginLeft: '4px', marginBottom: '5px' }}>{user.name} ({user.username})</div>
+        {detail &&
+          <div style={{ display: 'flex', marginBottom: '4px' }}>
+            <GoogleOutlined style={{ marginLeft: '7px', marginRight: '8px', fontSize: '1.2em' }} />
+            <span style={{ fontSize: '0.8em', backgroundColor: '#253545', paddingLeft: '4px', paddingRight: '4px', borderRadius: '4px' }}>{user.email}</span>
+          </div>
+        }
+        {detail &&
+          <div style={{ display: 'flex', marginBottom: '7px' }}>
+            <GithubOutlined style={{ marginLeft: '7px', marginRight: '8px', fontSize: '1.2em' }} />
+            <span style={{ fontSize: '0.8em', backgroundColor: '#253545', paddingLeft: '4px', paddingRight: '4px', borderRadius: '4px' }}>{user.github}</span>
+          </div>
+        }
 
         {/* Career */}
-        <div style={{ borderTop: 'solid', borderWidth: 'thin', paddingTop: '4px', borderColor: '#0A1F25' }}>
-          {this.careerElements}
-        </div>
+        {detail &&
+          <div style={{ borderTop: 'solid', borderWidth: 'thin', paddingTop: '3px', borderColor: '#0A2F30' }}>
+            {this.careerElements}
+          </div>
+        }
 
         {/* Favorite */}
-        {this.tagElements}
+        <div style={{ textAlign: 'center' }}>
+          {this.tagElements}
+        </div>
       </div>
     );
   }

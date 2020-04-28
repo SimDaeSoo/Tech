@@ -7,7 +7,7 @@ export async function getDefaultImage() {
     return images[0] ? images[0].url : '';
 }
 
-export async function getUsers(name) {
+export async function getUser(name) {
     const DEFAULT_USER_INFO = {
         name: 'User',
         username: '-',

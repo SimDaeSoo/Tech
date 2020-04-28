@@ -20,9 +20,9 @@
       "type": "date"
     },
     "user": {
+      "via": "careers",
       "plugin": "users-permissions",
-      "model": "user",
-      "via": "careers"
+      "model": "user"
     },
     "thumbnail": {
       "type": "string"

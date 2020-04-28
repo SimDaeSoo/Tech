@@ -10,13 +10,18 @@
     "timestamps": true
   },
   "attributes": {
-    "user": {
+    "users": {
+      "via": "tags",
       "plugin": "users-permissions",
-      "model": "user",
-      "via": "tags"
+      "collection": "user",
+      "dominant": true
     },
     "name": {
       "type": "string"
+    },
+    "articles": {
+      "via": "tags",
+      "collection": "article"
     }
   }
 }

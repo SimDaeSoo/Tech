@@ -64,16 +64,24 @@
       "type": "string"
     },
     "careers": {
-      "via": "user",
-      "collection": "career"
-    },
-    "tags": {
-      "via": "user",
-      "collection": "tag"
+      "collection": "career",
+      "via": "user"
     },
     "categories": {
+      "collection": "category",
+      "via": "user"
+    },
+    "tags": {
+      "collection": "tag",
+      "via": "users"
+    },
+    "articles": {
       "via": "user",
-      "collection": "category"
+      "collection": "article"
+    },
+    "views": {
+      "type": "integer",
+      "default": 0
     }
   }
 }

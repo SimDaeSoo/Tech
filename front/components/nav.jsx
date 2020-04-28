@@ -1,5 +1,5 @@
 import { Layout, Menu } from 'antd';
-import Link from 'next/link';
+import Router from 'next/router';
 import Profile from '../components/profile';
 
 export default class Nav extends React.Component {
@@ -8,16 +8,31 @@ export default class Nav extends React.Component {
     if (user.categories) {
       return user.categories.map((category, index) => {
         return (
-          <Menu.Item key={index + 2} style={{ lineHeight: '25px', height: '28px', marginTop: '3px', marginBottom: '3px' }}>
-            <span className="nav-text" style={{ fontSize: '0.8em' }}>
-              <Link href={{ path: '/', query: { user: user.username, category: category.name } }}>
-                <a>- {category.displayName}</a>
-              </Link>
-            </span>
+          <Menu.Item key={index + 2} style={{ lineHeight: '25px', height: '28px', marginTop: '3px', marginBottom: '3px' }}
+            onClick={() => { this.linkTo(`/home?user=${user.username}&category=${category.name}`) }}
+          >
+            <span className="nav-text" style={{ fontSize: '0.8em' }}>- {category.displayName}</span>
           </Menu.Item>
         );
       });
     }
+  }
+
+  linkTo(href) {
+    Router.push(href);
+  }
+
+  get defaultSelectedKey() {
+    const { user, query } = this.props;
+    let key = 1;
+
+    if (query.category) {
+      const categories = user.categories.map(category => category.name);
+      const index = categories.indexOf(query.category);
+      key = index >= 0 ? index + 2 : key;
+    }
+
+    return [`${key}`];
   }
 
   render() {
@@ -29,24 +44,15 @@ export default class Nav extends React.Component {
         onCollapse={onCollapse}
         collapsed={isCollapsed}
         width="220px"
-        style={{
-          overflowY: 'visible',
-          overflowX: 'hidden',
-          height: '100vh',
-          position: 'fixed',
-          left: 0,
-          zIndex: 1
-        }}
+        className='side-bar'
       >
-        <Profile user={user} defaultImage={defaultImage} />
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+        <Profile user={user} defaultImage={defaultImage} detail={true} />
+        <Menu theme="dark" mode="inline" defaultSelectedKeys={this.defaultSelectedKey}>
           <Menu.ItemGroup key="g1" title={<span style={{ color: 'white' }}>Category</span>}>
-            <Menu.Item key="1" style={{ lineHeight: '25px', height: '28px', marginTop: '3px', marginBottom: '3px' }}>
-              <span className="nav-text" style={{ fontSize: '0.8em' }}>
-                <Link href={{ path: '/', query: { user: user.username } }}>
-                  <a>- All</a>
-                </Link>
-              </span>
+            <Menu.Item key="1" style={{ lineHeight: '25px', height: '28px', marginTop: '3px', marginBottom: '3px' }}
+              onClick={() => { this.linkTo(`/home?user=${user.username}`) }}
+            >
+              <span className="nav-text" style={{ fontSize: '0.8em' }}>- All</span>
             </Menu.Item>
             {this.categoryElements}
           </Menu.ItemGroup>

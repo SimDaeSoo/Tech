@@ -19,9 +19,13 @@
       "type": "string"
     },
     "user": {
+      "via": "categories",
       "plugin": "users-permissions",
-      "model": "user",
-      "via": "categories"
+      "model": "user"
+    },
+    "articles": {
+      "via": "category",
+      "collection": "article"
     }
   }
 }
