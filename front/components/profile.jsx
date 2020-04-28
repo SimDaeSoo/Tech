@@ -10,7 +10,7 @@ export default class Profile extends React.Component {
           <div style={{ height: '22px', margin: '4px', fontSize: '0.9em', display: 'flex', backgroundColor: '#253545', borderRadius: '4px' }} key={index}>
             <img style={{ width: '22px', height: '22px', marginRight: '8px', borderRadius: '4px' }} src={thumbnail} />
             <span style={{ marginRight: '5px', lineHeight: '23px' }}>{career.name}</span>
-            <span style={{ fontSize: '0.8em', marginTop: '4px' }}>/ {begin} - {end}</span>
+            <span style={{ fontSize: '0.8em', marginTop: '4px' }}> {begin} - {end}</span>
           </div>
         )
       });
