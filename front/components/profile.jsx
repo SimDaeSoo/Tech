@@ -1,4 +1,4 @@
-import { GithubOutlined, GoogleOutlined } from '@ant-design/icons';
+import { GithubOutlined, GoogleOutlined, UserOutlined } from '@ant-design/icons';
 export default class Profile extends React.Component {
   get careerElements() {
     if (this.props.user.careers) {
@@ -38,7 +38,10 @@ export default class Profile extends React.Component {
         </div>
 
         {/* NickName */}
-        <div style={{ fontSize: '1.2em', marginLeft: '4px', marginBottom: '5px' }}>{user.name} ({user.username})</div>
+        <div style={{ fontSize: '1.2em', marginLeft: '7px', marginBottom: '5px' }}>
+          <UserOutlined style={{ marginRight: '7px' }} />
+          {user.name} ({user.username})
+        </div>
         {detail &&
           <div style={{ display: 'flex', marginBottom: '4px' }}>
             <GoogleOutlined style={{ marginLeft: '7px', marginRight: '8px', fontSize: '1.2em' }} />
