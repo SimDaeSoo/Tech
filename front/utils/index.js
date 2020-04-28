@@ -23,3 +23,10 @@ export async function getUser(name) {
 
     return user;
 }
+
+export async function getArticles(query) {
+    let url = `/articles?user.username=${query.user}${query.category?`&category.name=${query.category}`:''}`;
+    const response = await fetch(`${process.env.BASE_SSR_API_URL}${url}`);
+    const articles = await response.json();
+    return articles;
+}

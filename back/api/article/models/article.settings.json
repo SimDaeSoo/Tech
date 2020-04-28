@@ -35,6 +35,11 @@
     },
     "description": {
       "type": "string"
+    },
+    "width": {
+      "type": "integer",
+      "default": 300,
+      "max": 700
     }
   }
 }

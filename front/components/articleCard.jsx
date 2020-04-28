@@ -4,17 +4,17 @@ import ArticleThumbnail from './articleThumbnail';
 
 export default class ArticleCard extends React.Component {
     render() {
-        const { width, thumbnail } = this.props;
+        const { article, defaultImage } = this.props;
         return (
             <Card
                 className='article-card'
-                style={{ width: width, display: 'inline-block', margin: 10, boxShadow: '0px 6px 6px 0px rgba(0, 0, 0, 0.3)', textAlign: 'left' }}
-                cover={<ArticleThumbnail thumbnail={thumbnail} />}
+                style={{ width: article.width, display: 'inline-block', margin: 10, boxShadow: '0px 6px 6px 0px rgba(0, 0, 0, 0.3)', textAlign: 'left' }}
+                cover={<ArticleThumbnail thumbnail={article.thumbnail ? article.thumbnail : defaultImage} />}
             >
-                <Card.Meta title="Card title" description="This is the description" />
+                <Card.Meta title={article.title} description={article.description} />
                 <div style={{ marginTop: '4px' }}>
                     <CalendarOutlined />
-                    <em style={{ fontSize: '0.8em' }}> 2020.01.01</em>
+                    <em style={{ fontSize: '0.8em' }}> {article.createdAt}</em>
                 </div>
             </Card>
         );
