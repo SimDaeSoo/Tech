@@ -32,10 +32,6 @@ export default class Profile extends React.Component {
     const thumbnail = user.thumbnail ? user.thumbnail : defaultImage;
     return (
       <div style={{ width: '100%', padding: '3px', paddingBottom: '8px', borderRadius: '8px', color: 'white', backgroundColor: '#00151C', boxShadow: '0px 6px 6px 0px rgba(0, 0, 0, 0.3)' }}>
-        <div style={{ fontSize: '0.6em', marginTop: '3px', textAlign: 'center', backgroundColor: '#1890ff', borderRadius: '4px' }}>
-          Views {user.views}
-        </div>
-
         {/* Thumbnail */}
         <div style={{ width: '180px', height: '180px', margin: 'auto', marginBottom: '3px', marginTop: '7px' }}>
           <img style={{ width: '100%', height: '100%', borderRadius: '10px' }} src={thumbnail} />
