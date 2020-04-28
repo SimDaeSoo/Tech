@@ -11,17 +11,21 @@
   },
   "attributes": {
     "users": {
-      "via": "tags",
       "plugin": "users-permissions",
       "collection": "user",
+      "via": "tags",
       "dominant": true
     },
     "name": {
       "type": "string"
     },
     "articles": {
-      "via": "tags",
-      "collection": "article"
+      "collection": "article",
+      "via": "tags"
+    },
+    "color": {
+      "type": "string",
+      "default": "#1890ff"
     }
   }
 }

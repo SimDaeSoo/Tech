@@ -72,8 +72,8 @@
       "via": "user"
     },
     "tags": {
-      "collection": "tag",
-      "via": "users"
+      "via": "users",
+      "collection": "tag"
     },
     "articles": {
       "via": "user",

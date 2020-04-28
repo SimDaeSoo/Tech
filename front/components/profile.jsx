@@ -21,7 +21,7 @@ export default class Profile extends React.Component {
     if (this.props.user.tags) {
       return this.props.user.tags.map((tag, index) => {
         return (
-          <div style={{ fontSize: '0.7em', padding: '2px', borderRadius: '4px', backgroundColor: '#1890ff', margin: '2px', display: 'inline-block' }} key={index}>{tag.name}</div>
+          <div style={{ fontSize: '0.7em', padding: '2px', borderRadius: '4px', backgroundColor: tag.color, margin: '2px', display: 'inline-block' }} key={index}>{tag.name}</div>
         )
       });
     }

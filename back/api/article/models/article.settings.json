@@ -14,8 +14,8 @@
       "type": "string"
     },
     "tags": {
-      "collection": "tag",
       "via": "articles",
+      "collection": "tag",
       "dominant": true
     },
     "user": {
