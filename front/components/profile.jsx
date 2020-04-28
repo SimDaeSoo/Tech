@@ -1,4 +1,4 @@
-import { GithubOutlined, GoogleOutlined, EyeOutlined } from '@ant-design/icons';
+import { GithubOutlined, GoogleOutlined } from '@ant-design/icons';
 export default class Profile extends React.Component {
   get careerElements() {
     if (this.props.user.careers) {
@@ -33,7 +33,7 @@ export default class Profile extends React.Component {
     return (
       <div style={{ width: '100%', padding: '3px', paddingBottom: '8px', borderRadius: '8px', color: 'white', backgroundColor: '#00151C', boxShadow: '0px 6px 6px 0px rgba(0, 0, 0, 0.3)' }}>
         <div style={{ fontSize: '0.6em', marginTop: '3px', textAlign: 'center', backgroundColor: '#1890ff', borderRadius: '4px' }}>
-          <EyeOutlined style={{ fontSize: '1.2em' }} /> Views {user.views}
+          Views {user.views}
         </div>
 
         {/* Thumbnail */}
