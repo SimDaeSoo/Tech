@@ -38,7 +38,7 @@ export default class Profile extends React.Component {
         </div>
 
         {/* NickName */}
-        <div style={{ fontSize: '1.2em', marginLeft: '7px', marginBottom: '5px' }}>
+        <div style={{ fontSize: '1.2em', marginLeft: '7px', marginBottom: '3px' }}>
           <UserOutlined style={{ marginRight: '7px' }} />
           {user.name} ({user.username})
         </div>
