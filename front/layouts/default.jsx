@@ -30,6 +30,15 @@ export default class DefaultLayout extends React.Component {
       <Layout>
         <Head title="Blog" />
         <Nav onCollapse={this.onCollapse} isCollapsed={isCollapsed} user={user} defaultImage={defaultImage} query={query} />
+        <div
+          style={{
+            width: '100%', height: '100%', position: 'fixed', zIndex: 1, backgroundColor: 'rgba(0,0,0,0.2)',
+            display: isTinyDisplay && !isCollapsed ? 'block' : 'none'
+          }}
+          onClick={this.toggleNav}
+        >
+          this is background..
+        </div>
         <ToggleNav isCollapsed={isCollapsed} toggleNav={this.toggleNav} />
         <Layout className="site-layout" style={{ marginLeft: isCollapsed || isTinyDisplay ? 0 : 220, transition: 'all 0.2s' }}>
           {children}

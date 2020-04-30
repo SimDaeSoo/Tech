@@ -9,7 +9,7 @@ export default class Nav extends React.Component {
       return user.categories.map((category, index) => {
         return (
           <Menu.Item key={index + 2} style={{ lineHeight: '25px', height: '28px', marginTop: '3px', marginBottom: '3px' }}
-            onClick={() => { this.linkTo(`/home?user=${user.username}&category=${category.name}`) }}
+            onClick={() => { this.linkTo(`/?user=${user.username}&category=${category.name}`) }}
           >
             <span className="nav-text" style={{ fontSize: '0.8em' }}>- {category.displayName}</span>
           </Menu.Item>
@@ -45,12 +45,13 @@ export default class Nav extends React.Component {
         collapsed={isCollapsed}
         width="220px"
         className='side-bar'
+        style={{ zIndex: 3 }}
       >
         <Profile user={user} defaultImage={defaultImage} detail={true} />
         <Menu theme="dark" mode="inline" defaultSelectedKeys={this.defaultSelectedKey}>
           <Menu.ItemGroup key="g1" title={<span style={{ color: 'white' }}>Category</span>}>
             <Menu.Item key="1" style={{ lineHeight: '25px', height: '28px', marginTop: '3px', marginBottom: '3px' }}
-              onClick={() => { this.linkTo(`/home?user=${user.username}`) }}
+              onClick={() => { this.linkTo(`/?user=${user.username}`) }}
             >
               <span className="nav-text" style={{ fontSize: '0.8em' }}>- All</span>
             </Menu.Item>

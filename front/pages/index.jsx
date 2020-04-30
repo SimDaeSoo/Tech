@@ -30,9 +30,9 @@ export default class Home extends React.Component {
 }
 
 export async function getServerSideProps(context) {
-  const query = Object.assign(context.query, { user: 'daesoo94' });
+  const query = Object.assign({ user: 'daesoo94' }, context.query);
   const defaultImage = await getDefaultImage();
-  const user = await getUser('daesoo94');
+  const user = await getUser(query.user);
   const articles = await getArticles(query);
 
   return { props: { user, defaultImage, articles, query } };
