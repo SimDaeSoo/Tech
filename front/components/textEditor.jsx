@@ -58,7 +58,7 @@ export default class TextEditor extends React.Component {
     const { article, permission } = this.props;
     return (
       <div className='article-editor' onClick={this.focusEditor} style={{ textAlign: 'left' }}>
-        <div style={{ padding: '15px', position: 'relative', backgroundColor: '#F5F5F5' }}>
+        <div style={{ padding: '15px', position: 'relative', backgroundColor: '#F8F8F8', borderRadius: '10px' }}>
 
           <div style={{ opacity: 0.3, height: '120px', backgroundPosition: 'center center', backgroundRepeat: 'no-repeat', backgroundImage: `url(${article.thumbnail})`, backgroundSize: 'cover' }}>
           </div>
