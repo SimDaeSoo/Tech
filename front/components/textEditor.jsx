@@ -1,5 +1,5 @@
 import { Editor, EditorState, convertFromRaw, convertToRaw } from 'draft-js';
-import { SaveOutlined } from '@ant-design/icons';
+import { CalendarOutlined, UserOutlined, SaveOutlined } from '@ant-design/icons';
 import { Button, Tag } from 'antd';
 
 export default class TextEditor extends React.Component {
@@ -49,6 +49,11 @@ export default class TextEditor extends React.Component {
     return (<div> {elements} </div>);
   }
 
+  get createdAt() {
+    const { article } = this.props;
+    return article.createdAt.slice(0, 10);
+  }
+
   render() {
     const { article, permission } = this.props;
     return (
@@ -57,6 +62,13 @@ export default class TextEditor extends React.Component {
           <div style={{ zIndex: 1, position: 'relative' }}>
             <div style={{ fontSize: '2.5em', marginTop: '8px' }}>{article.title}</div>
             <div style={{ fontSize: '1.8em' }}>{article.description}</div>
+
+            <div>
+              <UserOutlined />
+              <em style={{ fontSize: '0.8em', marginLeft: '4px' }}>{article.user.username}</em>
+              <CalendarOutlined style={{ marginLeft: '4px' }} />
+              <em style={{ fontSize: '0.8em', marginLeft: '4px' }}> {this.createdAt}</em>
+            </div>
             {this.tagElements}
           </div>
           <div style={{ zIndex: 0, opacity: 0.3, position: 'absolute', top: '-2px', left: 0, width: '100%', height: '100%', backgroundPosition: 'center center', backgroundRepeat: 'no-repeat', backgroundImage: `url(${article.thumbnail})`, backgroundSize: 'cover' }}>
