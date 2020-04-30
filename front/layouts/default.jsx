@@ -27,7 +27,7 @@ export default class DefaultLayout extends React.Component {
     const { children, user, defaultImage, query } = this.props;
     const { isCollapsed, isTinyDisplay } = this.state;
     return (
-      <Layout style={{ height: '100%' }}>
+      <Layout style={{ height: 'fit-content' }}>
         <Head title="Blog" />
         <Nav onCollapse={this.onCollapse} isCollapsed={isCollapsed} user={user} defaultImage={defaultImage} query={query} />
         <div
