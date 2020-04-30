@@ -55,14 +55,14 @@ export default class TextEditor extends React.Component {
       <div className='article-editor' onClick={this.focusEditor} style={{ textAlign: 'left' }}>
         <div style={{ padding: '15px', position: 'relative' }}>
           <div style={{ zIndex: 1, position: 'relative' }}>
-            <div style={{ fontSize: '3em', marginTop: '8px' }}>{article.title}</div>
-            <div style={{ fontSize: '2em' }}>{article.description}</div>
+            <div style={{ fontSize: '2.5em', marginTop: '8px' }}>{article.title}</div>
+            <div style={{ fontSize: '1.8em' }}>{article.description}</div>
             {this.tagElements}
           </div>
           <div style={{ zIndex: 0, opacity: 0.3, position: 'absolute', top: '-2px', left: 0, width: '100%', height: '100%', backgroundPosition: 'center center', backgroundRepeat: 'no-repeat', backgroundImage: `url(${article.thumbnail})`, backgroundSize: 'cover' }}>
           </div>
         </div>
-        <div style={{ marginTop: '5px', marginBottom: '10px' }}>
+        <div style={{ marginTop: '5px', marginBottom: '10px', padding: '8px' }}>
           <Editor
             ref={this.setEditor}
             editorState={this.state.editorState}
