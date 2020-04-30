@@ -53,7 +53,7 @@ export default class Nav extends React.Component {
             <Menu.Item key="1" style={{ lineHeight: '25px', height: '28px', marginTop: '3px', marginBottom: '3px' }}
               onClick={() => { this.linkTo(`/?user=${user.username}`) }}
             >
-              <span className="nav-text" style={{ fontSize: '0.8em' }}>- All</span>
+              <span className="nav-text" style={{ fontSize: '0.8em' }}>- All logs</span>
             </Menu.Item>
             {this.categoryElements}
           </Menu.ItemGroup>

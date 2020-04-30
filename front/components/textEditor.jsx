@@ -65,14 +65,13 @@ export default class TextEditor extends React.Component {
           <div style={{ position: 'relative' }}>
             <div style={{ fontSize: '2.5em', marginTop: '8px' }}>{article.title}</div>
             <div style={{ fontSize: '1.8em' }}>{article.description}</div>
-
+            {this.tagElements}
             <div>
               <UserOutlined />
-              <em style={{ fontSize: '0.8em', marginLeft: '4px' }}>{article.user.username}</em>
+              <em style={{ fontSize: '0.8em', marginLeft: '4px' }}>{article.user.username} /</em>
               <CalendarOutlined style={{ marginLeft: '4px' }} />
               <em style={{ fontSize: '0.8em', marginLeft: '4px' }}> {this.createdAt}</em>
             </div>
-            {this.tagElements}
           </div>
         </div>
         <div style={{ marginTop: '5px', marginBottom: '10px', padding: '8px' }}>
