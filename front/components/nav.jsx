@@ -58,7 +58,7 @@ export default class Nav extends React.Component {
             {this.categoryElements}
           </Menu.ItemGroup>
         </Menu>
-        <div style={{ padding: '18px' }}></div>
+        <div style={{ padding: '36px' }}></div>
       </Layout.Sider>
     );
   }
