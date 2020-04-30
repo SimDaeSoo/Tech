@@ -45,7 +45,7 @@ export default class Nav extends React.Component {
         collapsed={isCollapsed}
         width="220px"
         className='side-bar'
-        style={{ zIndex: 3 }}
+        style={{ zIndex: 4 }}
       >
         <Profile user={user} defaultImage={defaultImage} detail={true} />
         <Menu theme="dark" mode="inline" defaultSelectedKeys={this.defaultSelectedKey}>

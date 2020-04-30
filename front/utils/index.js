@@ -30,3 +30,10 @@ export async function getArticles(query) {
     const articles = await response.json();
     return articles;
 }
+
+export async function getArticle(id) {
+    let url = `/articles/${id}`;
+    const response = await fetch(`${process.env.BASE_SSR_API_URL}${url}`);
+    const article = await response.json();
+    return article;
+}
