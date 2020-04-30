@@ -27,7 +27,7 @@ export default class DefaultLayout extends React.Component {
     const { children, user, defaultImage, query } = this.props;
     const { isCollapsed, isTinyDisplay } = this.state;
     return (
-      <Layout>
+      <Layout style={{ height: '100%' }}>
         <Head title="Blog" />
         <Nav onCollapse={this.onCollapse} isCollapsed={isCollapsed} user={user} defaultImage={defaultImage} query={query} />
         <div
@@ -39,7 +39,10 @@ export default class DefaultLayout extends React.Component {
         >
         </div>
         <ToggleNav isCollapsed={isCollapsed} toggleNav={this.toggleNav} />
-        <Layout className="site-layout" style={{ marginLeft: isCollapsed || isTinyDisplay ? 0 : 220, transition: 'all 0.2s' }}>
+        <Layout className="site-layout" style={{
+          marginLeft: isCollapsed || isTinyDisplay ? 0 : 220,
+          height: isTinyDisplay && !isCollapsed ? '100%' : '', transition: 'all 0.2s'
+        }}>
           {children}
         </Layout>
       </Layout>
