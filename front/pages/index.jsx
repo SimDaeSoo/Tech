@@ -6,7 +6,7 @@ import ArticleCard from '../components/articleCard';
 export default class Home extends React.Component {
   get articleElements() {
     const { articles, defaultImage } = this.props;
-    if (articles) {
+    if (articles && articles.length) {
       return articles.map((article, index) => {
         return (
           <ArticleCard article={article} defaultImage={defaultImage} key={index} />
