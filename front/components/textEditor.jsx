@@ -9,6 +9,7 @@ export default class TextEditor extends React.Component {
     super(props);
 
     let contents = emptyContentState;
+    let permission = false;
     try {
       const articleData = JSON.parse(this.props.article.contents);
       contents = convertFromRaw(articleData);
@@ -21,7 +22,7 @@ export default class TextEditor extends React.Component {
       defaultSyntax: 'javascript'
     });
     let editorState = EditorState.createWithContent(contents, decorator);
-    this.state = { editorState };
+    this.state = { editorState, permission };
   }
 
   handleKeyCommand = (command) => {
@@ -105,6 +106,7 @@ export default class TextEditor extends React.Component {
       body: JSON.stringify({ contents }),
       headers: { 'Content-Type': 'application/json' },
     });
+    this.setState({ permission: false })
   }
 
   get tagElements() {
@@ -126,8 +128,8 @@ export default class TextEditor extends React.Component {
   }
 
   render() {
-    const { editorState } = this.state;
-    const { article, permission } = this.props;
+    const { editorState, permission } = this.state;
+    const { article } = this.props;
 
     return (
       <div className='article-editor' onClick={this.focusEditor} style={{ textAlign: 'left' }}>
@@ -184,6 +186,14 @@ export default class TextEditor extends React.Component {
           <div style={{ textAlign: 'right' }}>
             <Button type="primary" onClick={this.save}>
               <SaveOutlined /> Save Article
+          </Button>
+          </div>
+        }
+        {
+          !permission &&
+          <div style={{ textAlign: 'right' }}>
+            <Button type="primary" onClick={() => { this.setState({ permission: true }) }}>
+              <SaveOutlined /> Edit Article
           </Button>
           </div>
         }
