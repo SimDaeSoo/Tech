@@ -20,6 +20,10 @@ code[class*="language-"] {
     hyphens: none;
 }
 
+pre[class*="language-"] div {
+    width: max-content;
+}
+
 pre[class*="language-"]::selection,
 code[class*="language-"]::selection {
     text-shadow: none;
