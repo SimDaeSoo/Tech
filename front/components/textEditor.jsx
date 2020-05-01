@@ -216,13 +216,16 @@ const styleMap = {
     color: 'rgba(255, 127, 0, 1.0)',
   },
   green: {
-    color: '#96b38a',
+    color: '#06733a',
   },
   blue: {
-    color: '#9CDCFE',
+    color: '#3C6CFE',
   },
   purple: {
-    color: '#c586c0',
+    color: '#a566a0',
+  },
+  white: {
+    color: '#FFFFFF'
   }
 };
 
@@ -322,6 +325,7 @@ var COLORS = [
   { label: 'Green', style: 'green' },
   { label: 'Blue', style: 'blue' },
   { label: 'Purple', style: 'purple' },
+  { label: 'White', style: 'white' },
 ];
 
 const ColorControls = (props) => {
