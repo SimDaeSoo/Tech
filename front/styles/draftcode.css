@@ -20,7 +20,7 @@ code[class*="language-"] {
     hyphens: none;
 }
 
-pre[class*="language-"] div {
+pre>div {
     width: max-content;
 }
 
