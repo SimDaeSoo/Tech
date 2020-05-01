@@ -32,7 +32,7 @@
 }
 
 .RichEditor-editor .public-DraftEditor-content {
-    min-height: 130px;
+    min-height: 100px;
 }
 
 .RichEditor-hidePlaceholder .public-DraftEditorPlaceholder-root {
@@ -91,6 +91,6 @@
 
 @media screen and (max-width: 768px) {
     .editor-toolbar {
-        width: 100px;
+        width: 130px;
     }
 }
