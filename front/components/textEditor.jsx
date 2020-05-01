@@ -1,4 +1,4 @@
-import { Editor, EditorState, convertFromRaw, convertToRaw, RichUtils, DefaultDraftBlockRenderMap, Decorator, } from 'draft-js';
+import { Editor, EditorState, convertFromRaw, convertToRaw, RichUtils, Modifier } from 'draft-js';
 import { CalendarOutlined, UserOutlined, SaveOutlined } from '@ant-design/icons';
 import { Button, Tag } from 'antd';
 import PrismDraftDecorator from 'draft-js-prism';
@@ -56,6 +56,42 @@ export default class TextEditor extends React.Component {
     );
   }
 
+  toggleColor = (toggledColor) => {
+    const { editorState } = this.state;
+    const selection = editorState.getSelection();
+
+    // Let's just allow one color at a time. Turn off all active colors.
+    const nextContentState = Object.keys(styleMap)
+      .reduce((contentState, color) => {
+        return Modifier.removeInlineStyle(contentState, selection, color)
+      }, editorState.getCurrentContent());
+
+    let nextEditorState = EditorState.push(
+      editorState,
+      nextContentState,
+      'change-inline-style'
+    );
+
+    const currentStyle = editorState.getCurrentInlineStyle();
+
+    // Unset style override for current color.
+    if (selection.isCollapsed()) {
+      nextEditorState = currentStyle.reduce((state, color) => {
+        return RichUtils.toggleInlineStyle(state, color);
+      }, nextEditorState);
+    }
+
+    // If the color is being toggled on, apply it.
+    if (!currentStyle.has(toggledColor)) {
+      nextEditorState = RichUtils.toggleInlineStyle(
+        nextEditorState,
+        toggledColor
+      );
+    }
+
+    this.onChange(nextEditorState);
+  }
+
   onChange = (editorState) => {
     this.setState({ editorState });
   }
@@ -105,6 +141,10 @@ export default class TextEditor extends React.Component {
             <InlineStyleControls
               editorState={editorState}
               onToggle={this.toggleInlineStyle}
+            />
+            <ColorControls
+              editorState={editorState}
+              onToggle={this.toggleColor}
             />
           </div>
         }
@@ -169,6 +209,21 @@ const styleMap = {
     backgroundColor: 'rgba(0, 0, 0, 0.05)',
     padding: 2,
   },
+  red: {
+    color: 'rgba(200, 0, 0, 1.0)',
+  },
+  orange: {
+    color: 'rgba(255, 127, 0, 1.0)',
+  },
+  green: {
+    color: '#96b38a',
+  },
+  blue: {
+    color: '#9CDCFE',
+  },
+  purple: {
+    color: '#c586c0',
+  }
 };
 
 function getBlockStyle(block) {
@@ -249,6 +304,31 @@ const InlineStyleControls = (props) => {
   return (
     <div className="RichEditor-controls">
       {INLINE_STYLES.map(type =>
+        <StyleButton
+          key={type.label}
+          active={currentStyle.has(type.style)}
+          label={type.label}
+          onToggle={props.onToggle}
+          style={type.style}
+        />
+      )}
+    </div>
+  );
+};
+
+var COLORS = [
+  { label: 'Red', style: 'red' },
+  { label: 'Orange', style: 'orange' },
+  { label: 'Green', style: 'green' },
+  { label: 'Blue', style: 'blue' },
+  { label: 'Purple', style: 'purple' },
+];
+
+const ColorControls = (props) => {
+  var currentStyle = props.editorState.getCurrentInlineStyle();
+  return (
+    <div className="RichEditor-controls">
+      {COLORS.map(type =>
         <StyleButton
           key={type.label}
           active={currentStyle.has(type.style)}
