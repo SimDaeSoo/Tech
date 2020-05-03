@@ -3,6 +3,10 @@ import { CalendarOutlined, UserOutlined, SaveOutlined } from '@ant-design/icons'
 import { Button, Tag } from 'antd';
 import PrismDraftDecorator from 'draft-js-prism';
 import Prism from 'prismjs';
+import 'prismjs/components/prism-javascript';
+import 'prismjs/components/prism-typescript';
+import 'prismjs/components/prism-jsx';
+import 'prismjs/components/prism-tsx';
 
 export default class TextEditor extends React.Component {
   constructor(props) {
@@ -16,10 +20,9 @@ export default class TextEditor extends React.Component {
     } catch (e) {
       console.log('article contents is empty');
     }
-
     const decorator = new PrismDraftDecorator({
       prism: Prism,
-      defaultSyntax: 'javascript'
+      defaultSyntax: 'tsx'
     });
     let editorState = EditorState.createWithContent(contents, decorator);
     this.state = { editorState, permission };
