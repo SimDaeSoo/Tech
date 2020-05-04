@@ -1,5 +1,7 @@
 import fetch from 'isomorphic-unfetch';
 
+const PAGE_LENGTH = 20;
+
 export async function getDefaultImage() {
     const response = await fetch(`${process.env.BASE_SSR_API_URL}/upload/files?name=default.jpg`);
     const images = await response.json();
@@ -25,10 +27,17 @@ export async function getUser(name) {
 }
 
 export async function getArticles(query) {
-    let url = `/articles?_sort=createdAt:desc&_limit=30&_start=${query.start?query.start:0}&user.username=${query.user}${query.category?`&category.name=${query.category}`:''}`;
+    let url = `/articles?_sort=createdAt:desc&_limit=${PAGE_LENGTH}&_start=${query.page?(query.page-1)*PAGE_LENGTH:0}&user.username=${query.user}${query.category?`&category.name=${query.category}`:''}`;
     const response = await fetch(`${process.env.BASE_SSR_API_URL}${url}`);
     const articles = await response.json();
-    return articles;
+
+    const count_url = `/articles/count?_sort=createdAt:desc&user.username=${query.user}${query.category?`&category.name=${query.category}`:''}`;
+    const countResponse = await fetch(`${process.env.BASE_SSR_API_URL}${count_url}`);
+    const count = await countResponse.json();
+    return {
+        articles,
+        count
+    };
 }
 
 export async function getArticle(id) {

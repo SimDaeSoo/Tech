@@ -31,6 +31,7 @@ export default class ArticleCard extends React.Component {
     return (
       <Card
         className='article-card'
+        hoverable={true}
         style={{ width: article.width, display: 'inline-block', margin: 10, boxShadow: '0px 6px 6px 0px rgba(0, 0, 0, 0.3)', textAlign: 'left' }}
         cover={<ArticleThumbnail thumbnail={article.thumbnail ? article.thumbnail : defaultImage} />}
         actions={[

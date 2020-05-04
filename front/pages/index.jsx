@@ -2,6 +2,7 @@ import { Layout } from 'antd';
 import { getDefaultImage, getUser, getArticles } from '../utils';
 import DefaultLayout from '../layouts/default';
 import ArticleCard from '../components/articleCard';
+import CustomPagination from '../components/pagination';
 
 export default class Home extends React.Component {
   get articleElements() {
@@ -16,12 +17,13 @@ export default class Home extends React.Component {
   }
 
   render() {
-    const { user, defaultImage, query } = this.props;
+    const { user, defaultImage, query, count } = this.props;
     return (
       <DefaultLayout user={user} defaultImage={defaultImage} query={query}>
         <Layout.Content style={{ overflow: 'initial' }}>
           <div className="site-layout-background" style={{ textAlign: 'center' }}>
             {this.articleElements}
+            <CustomPagination query={query} count={count} />
           </div>
         </Layout.Content>
       </DefaultLayout>
@@ -33,7 +35,7 @@ export async function getServerSideProps(context) {
   const query = Object.assign({ user: 'daesoo94' }, context.query);
   const defaultImage = await getDefaultImage();
   const user = await getUser(query.user);
-  const articles = await getArticles(query);
+  const { articles, count } = await getArticles(query);
 
-  return { props: { user, defaultImage, articles, query } };
+  return { props: { user, defaultImage, articles, count, query } };
 }

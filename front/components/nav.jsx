@@ -1,6 +1,7 @@
 import { Layout, Menu } from 'antd';
 import Router from 'next/router';
 import Profile from '../components/profile';
+import { UnlockOutlined } from '@ant-design/icons';
 
 export default class Nav extends React.Component {
   get categoryElements() {
@@ -58,7 +59,10 @@ export default class Nav extends React.Component {
             {this.categoryElements}
           </Menu.ItemGroup>
         </Menu>
-        <div style={{ padding: '36px' }}></div>
+        <div style={{ margin: '10px', backgroundColor: 'cornflowerblue', color: 'white', textAlign: 'center', borderRadius: '6px', paddingRight: '5px' }}>
+          <UnlockOutlined /> Login
+        </div>
+        <div style={{ padding: '40px' }}></div>
       </Layout.Sider>
     );
   }

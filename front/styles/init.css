@@ -12,6 +12,11 @@ body {
     z-index: 2;
 }
 
+.pagination {
+    margin: 10px;
+    margin-bottom: 15px;
+}
+
 .article-editor {
     border: 1px solid #F0F0F0;
     padding: 10px;

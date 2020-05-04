@@ -2,6 +2,7 @@ import { Layout } from 'antd';
 import Nav from '../components/nav';
 import Head from '../components/head';
 import ToggleNav from '../components/togglenav';
+import { UnlockOutlined } from '@ant-design/icons';
 
 export default class DefaultLayout extends React.Component {
   constructor(props) {
