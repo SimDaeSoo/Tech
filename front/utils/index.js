@@ -46,3 +46,33 @@ export async function getArticle(id) {
     const article = await response.json();
     return article;
 }
+
+export async function getAuth() {
+    const url = `/users/me`;
+    const response = await fetch(`${process.env.BASE_SSR_API_URL}${url}`);
+    const user = await response.json();
+    console.log(user);
+    return {
+        success: true,
+        user
+    };
+}
+
+export async function login(identifier, password) {
+    const url = `/auth/local`;
+    const response = await fetch(`/api${url}`, {
+        method: 'post',
+        body: JSON.stringify({
+            identifier,
+            password
+        }),
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    });
+    const data = await response.json();
+    console.log(data);
+    return {
+        success: true
+    };
+}

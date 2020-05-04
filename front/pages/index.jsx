@@ -1,5 +1,5 @@
 import { Layout } from 'antd';
-import { getDefaultImage, getUser, getArticles } from '../utils';
+import { getDefaultImage, getUser, getArticles, getAuth } from '../utils';
 import DefaultLayout from '../layouts/default';
 import ArticleCard from '../components/articleCard';
 import CustomPagination from '../components/pagination';
@@ -32,7 +32,7 @@ export default class Home extends React.Component {
             }
             {
               count === 0 &&
-              <div style={{ fontSize: '2em', height: '100vh', position: 'relative' }}>
+              <div style={{ fontSize: '2em', height: 'calc(100vh - 70px)', position: 'relative' }}>
                 <div style={{ position: 'absolute', left: 'calc(50% - 120px)', top: 'calc(50% - 22px)' }}>
                   <LoadingOutlined /> Article is empty..
                 </div>
@@ -47,9 +47,6 @@ export default class Home extends React.Component {
 
 export async function getServerSideProps(context) {
   const query = Object.assign({ user: 'daesoo94' }, context.query);
-  const defaultImage = await getDefaultImage();
-  const user = await getUser(query.user);
-  const { articles, count } = await getArticles(query);
-
-  return { props: { user, defaultImage, articles, count, query } };
+  const [defaultImage, user, auth, articleData] = await Promise.all([getDefaultImage(), getUser(query.user), getAuth(), getArticles(query)]);
+  return { props: { user, defaultImage, articles: articleData.articles, count: articleData.count, query, auth } };
 }

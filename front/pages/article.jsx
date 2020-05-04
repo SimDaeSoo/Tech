@@ -1,5 +1,5 @@
 import { Layout } from 'antd';
-import { getDefaultImage, getUser, getArticle } from '../utils';
+import { getDefaultImage, getUser, getArticle, getAuth } from '../utils';
 import DefaultLayout from '../layouts/default';
 import TextEditor from '../components/textEditor';
 
@@ -20,9 +20,6 @@ export default class Article extends React.Component {
 
 export async function getServerSideProps(context) {
   const query = Object.assign({ user: 'daesoo94' }, context.query);
-  const defaultImage = await getDefaultImage();
-  const user = await getUser(query.user);
-  const article = await getArticle(query.article_id);
-
-  return { props: { user, defaultImage, article, query } };
+  const [defaultImage, user, auth, article] = await Promise.all([getDefaultImage(), getUser(query.user), getAuth(), getArticle(query.article_id)]);
+  return { props: { user, defaultImage, auth, article, query } };
 }

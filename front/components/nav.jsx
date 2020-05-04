@@ -27,10 +27,10 @@ export default class Nav extends React.Component {
     const { user, query } = this.props;
     let key = 1;
 
-    if (query.category) {
+    if (query && query.category) {
       const categories = user.categories.map(category => category.name);
       const index = categories.indexOf(query.category);
-      key = index >= 0 ? index + 2 : key;
+      key = index >= 0 ? index + 2 : index;
     }
 
     return [`${key}`];
@@ -60,7 +60,7 @@ export default class Nav extends React.Component {
           </Menu.ItemGroup>
         </Menu>
         {/* cornflowerblue */}
-        <div style={{ margin: '10px', backgroundColor: 'indianred', color: 'white', textAlign: 'center', borderRadius: '6px' }}>
+        <div style={{ margin: '10px', backgroundColor: 'indianred', color: 'white', textAlign: 'center', borderRadius: '6px' }} onClick={() => { this.linkTo('/login'); }}>
           <UnlockOutlined />
         </div>
         <div style={{ padding: '40px' }}></div>
