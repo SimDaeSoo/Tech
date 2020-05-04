@@ -24,12 +24,12 @@ export default class DefaultLayout extends React.Component {
   }
 
   render() {
-    const { children, user, defaultImage, query } = this.props;
+    const { children, user, defaultImage, query, isAuth } = this.props;
     const { isCollapsed, isTinyDisplay } = this.state;
     return (
       <Layout>
         <Head title="Blog" />
-        <Nav onCollapse={this.onCollapse} isCollapsed={isCollapsed} user={user} defaultImage={defaultImage} query={query} />
+        <Nav onCollapse={this.onCollapse} isCollapsed={isCollapsed} user={user} defaultImage={defaultImage} query={query} isAuth={isAuth} />
         <div
           style={{
             width: '100%', height: '100%', position: 'fixed', zIndex: 2, opacity: 0,

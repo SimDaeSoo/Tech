@@ -2,8 +2,19 @@ import fetch from 'isomorphic-unfetch';
 
 const PAGE_LENGTH = 20;
 
+export class Network {
+    static async fetch(url, params) {
+        if (process.browser) {
+            const jwt = sessionStorage.getItem('jwt');
+            const extendsParams = jwt ? { headers: { Authorization: `Bearer ${jwt}` } } : {};
+            params = params ? Object.assign(params, extendsParams) : extendsParams;
+        }
+        return await fetch(url, params);
+    }
+}
+
 export async function getDefaultImage() {
-    const response = await fetch(`${process.env.BASE_SSR_API_URL}/upload/files?name=default.jpg`);
+    const response = await Network.fetch(`${process.env.BASE_SSR_API_URL}/upload/files?name=default.jpg`);
     const images = await response.json();
 
     return images[0] ? images[0].url : '';
@@ -19,7 +30,7 @@ export async function getUser(name) {
         tags: [],
         categories: []
     }
-    const response = await fetch(`${process.env.BASE_SSR_API_URL}/users?username=${name}`);
+    const response = await Network.fetch(`${process.env.BASE_SSR_API_URL}/users?username=${name}`);
     const users = await response.json();
     const user = users[0] || DEFAULT_USER_INFO;
 
@@ -27,12 +38,12 @@ export async function getUser(name) {
 }
 
 export async function getArticles(query) {
-    let url = `/articles?_sort=createdAt:desc&_limit=${PAGE_LENGTH}&_start=${query.page?(query.page-1)*PAGE_LENGTH:0}&user.username=${query.user}${query.category?`&category.name=${query.category}`:''}`;
-    const response = await fetch(`${process.env.BASE_SSR_API_URL}${url}`);
+    let url = `/articles?_sort=createdAt:desc&_limit=${PAGE_LENGTH}&_start=${query.page ? (query.page - 1) * PAGE_LENGTH : 0}&user.username=${query.user}${query.category ? `&category.name=${query.category}` : ''}`;
+    const response = await Network.fetch(`${process.env.BASE_SSR_API_URL}${url}`);
     const articles = await response.json();
 
-    const count_url = `/articles/count?_sort=createdAt:desc&user.username=${query.user}${query.category?`&category.name=${query.category}`:''}`;
-    const countResponse = await fetch(`${process.env.BASE_SSR_API_URL}${count_url}`);
+    const count_url = `/articles/count?_sort=createdAt:desc&user.username=${query.user}${query.category ? `&category.name=${query.category}` : ''}`;
+    const countResponse = await Network.fetch(`${process.env.BASE_SSR_API_URL}${count_url}`);
     const count = await countResponse.json();
     return {
         articles,
@@ -42,25 +53,24 @@ export async function getArticles(query) {
 
 export async function getArticle(id) {
     let url = `/articles/${id}`;
-    const response = await fetch(`${process.env.BASE_SSR_API_URL}${url}`);
+    const response = await Network.fetch(`${process.env.BASE_SSR_API_URL}${url}`);
     const article = await response.json();
     return article;
 }
 
 export async function getAuth() {
     const url = `/users/me`;
-    const response = await fetch(`${process.env.BASE_SSR_API_URL}${url}`);
-    const user = await response.json();
-    console.log(user);
+    const response = await Network.fetch(`/api${url}`);
+    const data = await response.json();
     return {
         success: true,
-        user
+        data
     };
 }
 
 export async function login(identifier, password) {
     const url = `/auth/local`;
-    const response = await fetch(`/api${url}`, {
+    const response = await Network.fetch(`/api${url}`, {
         method: 'post',
         body: JSON.stringify({
             identifier,
@@ -68,11 +78,13 @@ export async function login(identifier, password) {
         }),
         headers: {
             'Content-Type': 'application/json'
-        },
+        }
     });
     const data = await response.json();
-    console.log(data);
-    return {
-        success: true
-    };
+    if (data.jwt) {
+        sessionStorage.setItem('jwt', data.jwt);
+        return true;
+    } else {
+        return false;
+    }
 }

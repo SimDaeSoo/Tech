@@ -7,13 +7,14 @@ import 'prismjs/components/prism-javascript';
 import 'prismjs/components/prism-typescript';
 import 'prismjs/components/prism-jsx';
 import 'prismjs/components/prism-tsx';
+import { Network } from '../utils';
 
 export default class TextEditor extends React.Component {
   constructor(props) {
     super(props);
 
     let contents = emptyContentState;
-    let permission = false;
+    const editable = false;
     try {
       const articleData = JSON.parse(this.props.article.contents);
       contents = convertFromRaw(articleData);
@@ -25,7 +26,7 @@ export default class TextEditor extends React.Component {
       defaultSyntax: 'tsx'
     });
     let editorState = EditorState.createWithContent(contents, decorator);
-    this.state = { editorState, permission };
+    this.state = { editorState, editable };
   }
 
   handleKeyCommand = (command) => {
@@ -104,12 +105,12 @@ export default class TextEditor extends React.Component {
   save = async () => {
     const { article } = this.props;
     const contents = JSON.stringify(convertToRaw(this.state.editorState.getCurrentContent()));
-    const response = await fetch(`/api/articles/${article.id}`, {
+    const response = await Network.fetch(`/api/articles/${article.id}`, {
       method: 'put',
       body: JSON.stringify({ contents }),
       headers: { 'Content-Type': 'application/json' },
     });
-    this.setState({ permission: false })
+    this.setState({ editable: false })
   }
 
   get tagElements() {
@@ -131,13 +132,13 @@ export default class TextEditor extends React.Component {
   }
 
   render() {
-    const { editorState, permission } = this.state;
-    const { article } = this.props;
+    const { editorState, editable } = this.state;
+    const { article, permission } = this.props;
 
     return (
       <div className='article-editor' onClick={this.focusEditor} style={{ textAlign: 'left' }}>
         {
-          permission &&
+          permission && editable &&
           <div className='editor-toolbar'>
             <BlockStyleControls
               editorState={editorState}
@@ -177,15 +178,15 @@ export default class TextEditor extends React.Component {
             editorState={editorState}
             onChange={this.onChange}
             editorKey='article-editor'
-            readOnly={!permission}
+            readOnly={!editable}
             blockStyleFn={getBlockStyle}
             customStyleMap={styleMap}
             handleKeyCommand={this.handleKeyCommand}
-            spellCheck={permission}
+            spellCheck={editable}
           />
         </div>
         {
-          permission &&
+          permission && editable &&
           <div style={{ textAlign: 'right' }}>
             <Button type="primary" onClick={this.save}>
               <SaveOutlined /> Save Article
@@ -193,9 +194,9 @@ export default class TextEditor extends React.Component {
           </div>
         }
         {
-          !permission &&
+          permission && !editable &&
           <div style={{ textAlign: 'right' }}>
-            <Button type="primary" onClick={() => { this.setState({ permission: true }) }}>
+            <Button type="primary" onClick={() => { this.setState({ editable: true }) }}>
               <SaveOutlined /> Edit Article
           </Button>
           </div>

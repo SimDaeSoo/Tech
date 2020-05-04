@@ -1,9 +1,13 @@
 import { Layout, Menu } from 'antd';
 import Router from 'next/router';
 import Profile from '../components/profile';
-import { UnlockOutlined } from '@ant-design/icons';
+import { LockOutlined, SafetyCertificateOutlined } from '@ant-design/icons';
 
 export default class Nav extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
   get categoryElements() {
     const { user } = this.props;
     if (user.categories) {
@@ -37,7 +41,7 @@ export default class Nav extends React.Component {
   }
 
   render() {
-    const { onCollapse, isCollapsed, user, defaultImage } = this.props;
+    const { onCollapse, isCollapsed, user, defaultImage, isAuth } = this.props;
     return (
       <Layout.Sider
         breakpoint="lg"
@@ -59,10 +63,18 @@ export default class Nav extends React.Component {
             {this.categoryElements}
           </Menu.ItemGroup>
         </Menu>
-        {/* cornflowerblue */}
-        <div style={{ margin: '10px', backgroundColor: 'indianred', color: 'white', textAlign: 'center', borderRadius: '6px' }} onClick={() => { this.linkTo('/login'); }}>
-          <UnlockOutlined />
-        </div>
+        {
+          !isAuth &&
+          <div style={{ margin: '10px', backgroundColor: '#1890ff', color: 'white', textAlign: 'center', borderRadius: '6px' }} onClick={() => { this.linkTo('/login'); }}>
+            <LockOutlined />
+          </div>
+        }
+        {
+          isAuth &&
+          <div style={{ margin: '10px', backgroundColor: '#1890ff', color: 'white', textAlign: 'center', borderRadius: '6px' }}>
+            <SafetyCertificateOutlined />
+          </div>
+        }
         <div style={{ padding: '40px' }}></div>
       </Layout.Sider>
     );
