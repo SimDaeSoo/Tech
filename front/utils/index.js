@@ -25,7 +25,7 @@ export async function getUser(name) {
 }
 
 export async function getArticles(query) {
-    let url = `/articles?user.username=${query.user}${query.category?`&category.name=${query.category}`:''}`;
+    let url = `/articles?_sort=createdAt:desc&_limit=30&_start=${query.start?query.start:0}&user.username=${query.user}${query.category?`&category.name=${query.category}`:''}`;
     const response = await fetch(`${process.env.BASE_SSR_API_URL}${url}`);
     const articles = await response.json();
     return articles;

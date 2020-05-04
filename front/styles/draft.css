@@ -18,11 +18,7 @@
 
 .RichEditor-editor pre {
     margin-bottom: 0;
-}
-
-.RichEditor-editor .public-DraftStyleDefault-pre {
-    margin-bottom: 0.5em;
-    margin-top: 0.5em;
+    overflow: initial;
 }
 
 .RichEditor-editor .public-DraftEditorPlaceholder-root,
@@ -54,6 +50,9 @@
     padding: 20px;
     text-align: left;
     border-radius: 8px;
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
+    overflow: auto;
 }
 
 .RichEditor-controls {
