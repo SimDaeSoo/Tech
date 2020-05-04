@@ -3,6 +3,7 @@ import { getDefaultImage, getUser, getArticles } from '../utils';
 import DefaultLayout from '../layouts/default';
 import ArticleCard from '../components/articleCard';
 import CustomPagination from '../components/pagination';
+import { LoadingOutlined } from '@ant-design/icons';
 
 export default class Home extends React.Component {
   get articleElements() {
@@ -22,8 +23,21 @@ export default class Home extends React.Component {
       <DefaultLayout user={user} defaultImage={defaultImage} query={query}>
         <Layout.Content style={{ overflow: 'initial' }}>
           <div className="site-layout-background" style={{ textAlign: 'center' }}>
-            {this.articleElements}
-            <CustomPagination query={query} count={count} />
+            {
+              count > 0 &&
+              <div>
+                {this.articleElements}
+                <CustomPagination query={query} count={count} />
+              </div>
+            }
+            {
+              count === 0 &&
+              <div style={{ fontSize: '2em', height: '100vh', position: 'relative' }}>
+                <div style={{ position: 'absolute', left: 'calc(50% - 120px)', top: 'calc(50% - 22px)' }}>
+                  <LoadingOutlined /> Article is empty..
+                </div>
+              </div>
+            }
           </div>
         </Layout.Content>
       </DefaultLayout>

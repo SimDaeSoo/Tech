@@ -59,8 +59,9 @@ export default class Nav extends React.Component {
             {this.categoryElements}
           </Menu.ItemGroup>
         </Menu>
-        <div style={{ margin: '10px', backgroundColor: 'cornflowerblue', color: 'white', textAlign: 'center', borderRadius: '6px', paddingRight: '5px' }}>
-          <UnlockOutlined /> Login
+        {/* cornflowerblue */}
+        <div style={{ margin: '10px', backgroundColor: 'indianred', color: 'white', textAlign: 'center', borderRadius: '6px' }}>
+          <UnlockOutlined />
         </div>
         <div style={{ padding: '40px' }}></div>
       </Layout.Sider>
