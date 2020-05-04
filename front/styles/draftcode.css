@@ -1,3 +1,8 @@
+pre[data-editor="article-editor"] {
+    padding-right: 20px;
+    width: max-content;
+}
+
 pre[class*="language-"],
 code[class*="language-"] {
     color: #d4d4d4;
@@ -20,9 +25,9 @@ code[class*="language-"] {
     hyphens: none;
 }
 
-pre>div {
+/* pre>div {
     width: max-content;
-}
+} */
 
 pre[class*="language-"]::selection,
 code[class*="language-"]::selection {
@@ -41,7 +46,6 @@ code[class*="language-"]::selection {
 pre[class*="language-"] {
     padding: 1em;
     margin: .5em 0;
-    overflow: auto;
     background: #1e1e1e;
 }
 
