@@ -40,6 +40,10 @@
       "type": "integer",
       "default": 300,
       "max": 700
+    },
+    "comments": {
+      "via": "article",
+      "collection": "comment"
     }
   }
 }

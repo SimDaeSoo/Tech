@@ -20,6 +20,7 @@ body {
 .article-editor {
     border: 1px solid #F0F0F0;
     padding: 10px;
+    padding-top: 0;
     min-height: 1em;
     max-width: 1240px;
     margin-top: 20px;
@@ -28,6 +29,24 @@ body {
     margin-right: auto;
     background-color: #FAFAFF;
     box-shadow: 0px 6px 6px 0px rgba(0, 0, 0, 0.3);
+}
+
+.comments {
+    text-align: left;
+    border: 1px solid #F0F0F0;
+    padding: 10px;
+    min-height: 1em;
+    max-width: 1240px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #FAFAFF;
+    box-shadow: 0px 6px 6px 0px rgba(0, 0, 0, 0.3);
+}
+
+.comment {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 @media screen and (max-width: 768px) {

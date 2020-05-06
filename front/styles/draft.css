@@ -14,14 +14,13 @@
 
 .RichEditor-editor figure {
     text-align: center;
-    margin: 0px;
 }
 
 .RichEditor-editor figure img {
     max-width: 100%;
     border: 1px;
     border-style: ridge;
-    padding: 10px;
+    padding: 2px;
 }
 
 .RichEditor-editor h1 {
