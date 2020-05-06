@@ -12,7 +12,7 @@ export default class Head extends React.Component {
     return (
       <NextHead>
         <meta charSet="UTF-8" />
-        <title>{title || ''}</title>
+        <title>{title || 'Blog'}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content={description || defaultDescription} />
         <meta name="keywords" content={keywords || defaultKeywords} />
@@ -30,6 +30,7 @@ export default class Head extends React.Component {
         <meta property="og:image" content={ogImage || defaultOGImage} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
+        <meta name="google-site-verification" content="FfMGp5M6fQZH3wrjh5qWzW7uCBBbHbZZ6C30z4ZwSd0" />
       </NextHead>
     );
   }
