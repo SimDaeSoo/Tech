@@ -12,6 +12,18 @@
     padding: 10px;
 }
 
+.RichEditor-editor figure {
+    text-align: center;
+    margin: 0px;
+}
+
+.RichEditor-editor figure img {
+    max-width: 100%;
+    border: 1px;
+    border-style: ridge;
+    padding: 10px;
+}
+
 .RichEditor-editor h1 {
     font-size: 2em;
 }

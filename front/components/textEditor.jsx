@@ -1,4 +1,7 @@
-import { Editor, EditorState, convertFromRaw, convertToRaw, RichUtils, Modifier } from 'draft-js';
+import Editor from 'draft-js-plugins-editor';
+import createImagePlugin from 'draft-js-image-plugin';
+import ImageAdd from './imageAdd';
+import { EditorState, convertFromRaw, convertToRaw, RichUtils, Modifier } from 'draft-js';
 import { CalendarOutlined, UserOutlined, SaveOutlined } from '@ant-design/icons';
 import { Button, Tag } from 'antd';
 import PrismDraftDecorator from 'draft-js-prism';
@@ -13,6 +16,10 @@ export default class TextEditor extends React.Component {
   constructor(props) {
     super(props);
 
+    const imagePlugin = createImagePlugin();
+    const plugins = [imagePlugin];
+
+    const decorators = [new PrismDraftDecorator({ prism: Prism, defaultSyntax: 'tsx' })];
     let contents = emptyContentState;
     const editable = false;
     try {
@@ -21,12 +28,8 @@ export default class TextEditor extends React.Component {
     } catch (e) {
       console.log('article contents is empty');
     }
-    const decorator = new PrismDraftDecorator({
-      prism: Prism,
-      defaultSyntax: 'tsx'
-    });
-    let editorState = EditorState.createWithContent(contents, decorator);
-    this.state = { editorState, editable };
+    let editorState = EditorState.createWithContent(contents);
+    this.state = { editorState, editable, decorators, plugins, imagePlugin };
   }
 
   handleKeyCommand = (command) => {
@@ -131,8 +134,14 @@ export default class TextEditor extends React.Component {
     return article.createdAt.slice(0, 10);
   }
 
+  addImage = (url) => {
+    const { editorState, imagePlugin } = this.state;
+    const newEditorState = imagePlugin.addImage(editorState, url);
+    this.onChange(newEditorState);
+  }
+
   render() {
-    const { editorState, editable } = this.state;
+    const { editorState, editable, decorators, plugins } = this.state;
     const { article, permission } = this.props;
 
     return (
@@ -176,6 +185,8 @@ export default class TextEditor extends React.Component {
           <Editor
             ref='editor'
             editorState={editorState}
+            decorators={decorators}
+            plugins={plugins}
             onChange={this.onChange}
             editorKey='article-editor'
             readOnly={!editable}
@@ -184,6 +195,13 @@ export default class TextEditor extends React.Component {
             handleKeyCommand={this.handleKeyCommand}
             spellCheck={editable}
           />
+          {
+            permission && editable &&
+            <ImageAdd
+              editorState={this.state.editorState}
+              onChange={this.addImage}
+            />
+          }
         </div>
         {
           permission && editable &&

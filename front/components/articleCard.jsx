@@ -23,7 +23,7 @@ export default class ArticleCard extends React.Component {
   }
 
   linkTo(href) {
-    Router.push(href);
+    Router.push(href).then(() => window.scrollTo(0, 0));
   }
 
   render() {
