@@ -2,7 +2,7 @@ import NextHead from 'next/head';
 import { string } from 'prop-types';
 
 const defaultTitle = 'Blog'
-const defaultDescription = '';
+const defaultDescription = '심대수(daesoo94)의 개발 블로그 입니다. Keep Study! 다들 열심히 합시다~!.';
 const defaultKeywords = 'next.js, tech, develop, study, front, blog';
 const defaultOGURL = '';
 const defaultOGImage = '';
@@ -23,7 +23,7 @@ export default class Head extends React.Component {
         <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png" />
         <link rel="mask-icon" href="/static/favicon-mask.svg" color="#000000" />
         <meta property="og:url" content={url || defaultOGURL} />
-        <meta property="og:title" content={title || ''} />
+        <meta property="og:title" content={title || defaultTitle} />
         <meta property="og:description" content={description || defaultDescription} />
         <meta name="twitter:site" content={url || defaultOGURL} />
         <meta name="twitter:card" content="summary_large_image" />
