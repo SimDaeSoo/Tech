@@ -36,7 +36,7 @@ export default class Article extends React.Component {
     const { isAuth, clientArticle } = this.state;
     const { user, defaultImage, query, article } = this.props;
     return (
-      <DefaultLayout user={user} defaultImage={defaultImage} query={query} isAuth={isAuth}>
+      <DefaultLayout user={user} defaultImage={defaultImage} query={query} isAuth={isAuth} title={article.title}>
         <Layout.Content style={{ overflow: 'initial' }}>
           <div className="site-layout-background" style={{ textAlign: 'center' }}>
             <TextEditor article={article} permission={isAuth} />
