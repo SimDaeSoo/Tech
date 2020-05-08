@@ -32,11 +32,26 @@ export default class Article extends React.Component {
     this.setState({ clientArticle });
   }
 
+  get parsedArticleContents() {
+    const { article } = this.props;
+    let contents = ''
+    try {
+      const articleContents = JSON.parse(article.contents);
+      contents = articleContents.blocks.reduce((content, block) => block.type === 'code-block' ? content : content + block.text + ' ', '');
+    } catch (e) { }
+    return contents;
+  }
+
+  get articleTags() {
+    const { article } = this.props;
+    return article.tags.map(tag => tag.name);
+  }
+
   render() {
     const { isAuth, clientArticle } = this.state;
     const { user, defaultImage, query, article } = this.props;
     return (
-      <DefaultLayout user={user} defaultImage={defaultImage} query={query} isAuth={isAuth} title={article.title}>
+      <DefaultLayout user={user} defaultImage={defaultImage} query={query} isAuth={isAuth} title={article.title} description={this.parsedArticleContents} keywords={article.tags ? this.articleTags : ''}>
         <Layout.Content style={{ overflow: 'initial' }}>
           <div className="site-layout-background" style={{ textAlign: 'center' }}>
             <TextEditor article={article} permission={isAuth} />

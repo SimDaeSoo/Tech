@@ -1,8 +1,9 @@
 import NextHead from 'next/head';
 import { string } from 'prop-types';
 
+const defaultTitle = 'Blog'
 const defaultDescription = '';
-const defaultKeywords = '';
+const defaultKeywords = 'next.js, tech, develop, study, front, blog';
 const defaultOGURL = '';
 const defaultOGImage = '';
 
@@ -12,7 +13,7 @@ export default class Head extends React.Component {
     return (
       <NextHead>
         <meta charSet="UTF-8" />
-        <title>{title || 'Blog'}</title>
+        <title>{title || defaultTitle}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content={description || defaultDescription} />
         <meta name="keywords" content={keywords || defaultKeywords} />
