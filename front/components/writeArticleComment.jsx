@@ -5,7 +5,7 @@ import { Network } from '../utils';
 export default class WriteArticleComment extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { author: '', content: '' };
+    this.state = { author: '', content: '', loading: false };
   }
 
   setName = (e) => {
@@ -19,26 +19,29 @@ export default class WriteArticleComment extends React.Component {
   }
 
   apply = async () => {
-    const author = '';
-    const content = '';
-    const { update } = this.props;
+    if (this.state.author && this.state.content && !this.state.loading) {
+      const author = '';
+      const content = '';
+      let loading = true;
+      this.setState({ loading });
 
-    const response = await Network.fetch(`/api/comments`, {
-      method: 'post',
-      body: JSON.stringify({
-        author: this.state.author,
-        content: this.state.content,
-        article: this.props.articleID
-      }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
-    if (update) {
-      update();
+      const { update } = this.props;
+      const response = await Network.fetch(`/api/comments`, {
+        method: 'post',
+        body: JSON.stringify({
+          author: this.state.author,
+          content: this.state.content,
+          article: this.props.articleID
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (update) { update(); }
+      loading = false;
+      this.setState({ author, content, loading });
     }
-
-    this.setState({ author, content });
   }
 
   render() {
