@@ -51,7 +51,15 @@ export async function getArticles(query) {
     };
 }
 
+export async function viewArticle(id) {
+    let url = `/articles/${id}/view`;
+    const response = await Network.fetch(`${process.env.BASE_SSR_API_URL}${url}`);
+    const view = await response.json();
+    return view;
+}
+
 export async function getArticle(id) {
+    await viewArticle(id);
     let url = `/articles/${id}`;
     const response = await Network.fetch(`${process.env.BASE_SSR_API_URL}${url}`);
     const article = await response.json();

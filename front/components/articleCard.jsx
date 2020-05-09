@@ -22,6 +22,19 @@ export default class ArticleCard extends React.Component {
     return (<div style={{ position: 'absolute', top: '2px', left: 0 }}> {elements} </div>);
   }
 
+  get viewElements() {
+    const { article } = this.props;
+    const parsedNumbers = article.view.toString().split('.');
+    parsedNumbers[0] = parsedNumbers[0].replace(/(\d)(?=(?:\d{3})+(?!\d))/g, "$1,");
+    const views = parsedNumbers.join('.')
+
+    return (
+      <div className="article-view-count">
+        <em style={{ fontSize: '0.8em' }}>{views} views</em>
+      </div>
+    )
+  }
+
   linkTo(href) {
     Router.push(href).then(() => window.scrollTo(0, 0));
   }
@@ -48,6 +61,7 @@ export default class ArticleCard extends React.Component {
       >
         <Card.Meta title={article.title} description={article.description} />
         {this.tagElements}
+        {this.viewElements}
       </Card>
     );
   }

@@ -28,7 +28,7 @@ export default class DefaultLayout extends React.Component {
     const { isCollapsed, isTinyDisplay } = this.state;
     return (
       <Layout>
-        <Head title="Blog" title={title} description={description} keywords={keywords} />
+        <Head title="Blog" title={title} description={description} keywords={keywords ? keywords.toString() : ''} />
         <Nav onCollapse={this.onCollapse} isCollapsed={isCollapsed} user={user} defaultImage={defaultImage} query={query} isAuth={isAuth} />
         <div
           style={{

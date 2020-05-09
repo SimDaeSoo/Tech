@@ -7,7 +7,7 @@
 .RichEditor-editor {
     border-top: 1px solid #ddd;
     cursor: text;
-    font-size: 1em;
+    font-size: 1.2em;
     margin-top: 10px;
     padding: 10px;
 }
@@ -102,5 +102,9 @@
 @media screen and (max-width: 768px) {
     .editor-toolbar {
         width: 130px;
+    }
+
+    .RichEditor-editor {
+        font-size: 1em;
     }
 }

@@ -2,7 +2,7 @@ import Editor from 'draft-js-plugins-editor';
 import createImagePlugin from 'draft-js-image-plugin';
 import ImageAdd from './imageAdd';
 import { EditorState, convertFromRaw, convertToRaw, RichUtils, Modifier } from 'draft-js';
-import { CalendarOutlined, UserOutlined, SaveOutlined } from '@ant-design/icons';
+import { CalendarOutlined, UserOutlined, SaveOutlined, EyeOutlined } from '@ant-design/icons';
 import { Button, Tag } from 'antd';
 import PrismDraftDecorator from 'draft-js-prism';
 import Prism from 'prismjs';
@@ -134,6 +134,14 @@ export default class TextEditor extends React.Component {
     return article.createdAt.slice(0, 10);
   }
 
+  get views() {
+    const { article } = this.props;
+    const parsedNumbers = article.view.toString().split('.');
+    parsedNumbers[0] = parsedNumbers[0].replace(/(\d)(?=(?:\d{3})+(?!\d))/g, "$1,");
+    const views = parsedNumbers.join('.')
+    return views;
+  }
+
   addImage = (url) => {
     const { editorState, imagePlugin } = this.state;
     const newEditorState = imagePlugin.addImage(editorState, url);
@@ -177,7 +185,9 @@ export default class TextEditor extends React.Component {
               <UserOutlined />
               <em style={{ fontSize: '0.8em', marginLeft: '4px' }}>{article.user.username} /</em>
               <CalendarOutlined style={{ marginLeft: '4px' }} />
-              <em style={{ fontSize: '0.8em', marginLeft: '4px' }}> {this.createdAt}</em>
+              <em style={{ fontSize: '0.8em', marginLeft: '4px' }}> {this.createdAt} /</em>
+              <EyeOutlined style={{ marginLeft: '4px' }} />
+              <em style={{ fontSize: '0.8em', marginLeft: '4px' }}>{this.views} views</em>
             </div>
           </div>
         </div>

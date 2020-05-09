@@ -47,6 +47,14 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "GET",
+      "path": "/articles/:id/view",
+      "handler": "article.view",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }

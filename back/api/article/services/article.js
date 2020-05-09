@@ -8,5 +8,16 @@
 module.exports = {
   find(params, populate) {
     return strapi.query('article').find(params, populate);
+  },
+  async view(id) {
+    const article = await strapi.query('article').findOne({
+      id
+    });
+
+    return strapi.query('article').update({
+      id
+    }, {
+      view: article.view + 1
+    });
   }
 };

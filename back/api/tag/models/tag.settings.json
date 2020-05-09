@@ -11,17 +11,17 @@
   },
   "attributes": {
     "users": {
+      "via": "tags",
       "plugin": "users-permissions",
       "collection": "user",
-      "via": "tags",
       "dominant": true
     },
     "name": {
       "type": "string"
     },
     "articles": {
-      "collection": "article",
-      "via": "tags"
+      "via": "tags",
+      "collection": "article"
     },
     "color": {
       "type": "string",

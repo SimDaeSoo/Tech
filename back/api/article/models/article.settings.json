@@ -14,14 +14,14 @@
       "type": "string"
     },
     "tags": {
-      "via": "articles",
       "collection": "tag",
+      "via": "articles",
       "dominant": true
     },
     "user": {
+      "via": "articles",
       "plugin": "users-permissions",
-      "model": "user",
-      "via": "articles"
+      "model": "user"
     },
     "category": {
       "model": "category",
@@ -42,8 +42,12 @@
       "max": 700
     },
     "comments": {
-      "via": "article",
-      "collection": "comment"
+      "collection": "comment",
+      "via": "article"
+    },
+    "view": {
+      "type": "integer",
+      "default": 0
     }
   }
 }

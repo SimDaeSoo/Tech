@@ -11,7 +11,7 @@ export default class ArticleComment extends React.Component {
       <Comment
         className="comment"
         author={<a>{comment.author} / <CalendarOutlined /> {this.createdAt}</a>}
-        avatar={<UserOutlined style={{ paddingLeft: '1px', lineHeight: '31px', fontSize: '1.3em', width: '30px', textAlign: 'center', height: '30px', borderRadius: '15px', backgroundColor: 'grey' }} />}
+        avatar={<UserOutlined style={{ lineHeight: '32px', fontSize: '1.3em', width: '30px', textAlign: 'center', height: '30px', borderRadius: '15px', backgroundColor: 'grey' }} />}
         content={<p>{comment.content}</p>}
       />
     );
