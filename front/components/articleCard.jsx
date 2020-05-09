@@ -1,5 +1,5 @@
 import { Card, Tag } from 'antd';
-import { CalendarOutlined, UserOutlined } from '@ant-design/icons';
+import { CalendarOutlined, UserOutlined, MessageOutlined } from '@ant-design/icons';
 import ArticleThumbnail from './articleThumbnail';
 import Router from 'next/router';
 
@@ -35,6 +35,20 @@ export default class ArticleCard extends React.Component {
     )
   }
 
+  get commentElements() {
+    const { article } = this.props;
+    const parsedNumbers = article.comments.length.toString().split('.');
+    parsedNumbers[0] = parsedNumbers[0].replace(/(\d)(?=(?:\d{3})+(?!\d))/g, "$1,");
+    const commentsLength = parsedNumbers.join('.')
+
+    return (
+      <div className="article-comment-count">
+        <MessageOutlined />
+        <em style={{ fontSize: '0.9em', marginLeft: '4px' }}>{commentsLength}</em>
+      </div>
+    )
+  }
+
   linkTo(href) {
     Router.push(href).then(() => window.scrollTo(0, 0));
   }
@@ -62,6 +76,7 @@ export default class ArticleCard extends React.Component {
         <Card.Meta title={article.title} description={article.description} />
         {this.tagElements}
         {this.viewElements}
+        {this.commentElements}
       </Card>
     );
   }
