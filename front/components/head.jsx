@@ -2,7 +2,7 @@ import NextHead from 'next/head';
 import { string } from 'prop-types';
 
 const defaultTitle = 'Blog'
-const defaultDescription = '심대수(daesoo94)의 개발 블로그 입니다. Keep Study! 다들 열심히 합시다~!.';
+const defaultDescription = '심대수(daesoo94)의 개발 블로그 입니다. javascript, typescript, vue.js, next.js, node.js, docker, aws 등에 관심이 있습니다.';
 const defaultKeywords = 'next.js, tech, develop, study, front, blog';
 const defaultOGURL = '';
 const defaultOGImage = '';
