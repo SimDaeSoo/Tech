@@ -6,7 +6,7 @@ const {
 async function SITE_MAP() {
   const articles = await strapi.services.article.find();
   const ITEMS = articles.map((article) => {
-    const URL = `https://www.develop-story.com/article?user=${article.user.username}&amp;category=${article.category.name}&amp;article_id=${article.id};`;
+    const URL = `https://www.develop-story.com/article?user=${article.user.username}&amp;category=${article.category.name}&amp;article_id=${article.id}`;
     const PRIORITY = 0.5;
     return `<url>
     <loc>${URL}</loc>
