@@ -19,7 +19,7 @@
     "draft-js-plugins-editor": "^3.0.0",
     "draft-js-prism": "^1.0.6",
     "isomorphic-unfetch": "^3.0.0",
-    "next": "^9.3.5",
+    "next": "^11.1.0",
     "prismjs": "^1.20.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
